@@ -1,0 +1,9 @@
+flask
+python-dotenv
+openai
+requests
+sentence-transformers
+nltk
+sqlalchemy
+chromadb
+pydantic
