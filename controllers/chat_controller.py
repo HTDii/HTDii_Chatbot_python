@@ -55,22 +55,35 @@ def chat_api():
         and current_context.get("sale_category")
         and current_context.get("platform")
         and isinstance(result, dict)
-        and result.get("use_ai") is True
     ):
-        # ✅ LOG DUY NHẤT CẦN GIỮ
-        print(
-            "🤖 [AI CALL]",
-            "| language =", current_context.get("language"),
-            "| category =", current_context.get("sale_category"),
-            "| platform =", current_context.get("platform"),
-        )
+        # Nếu là bước chọn platform (use_ai=True)
+        # HOẶC là chat tự do sau khi đã có đủ context
+        if result.get("use_ai") is True or message not in (
+            "SNS_PERSONAL",
+            "BRAND_BUILDING",
+            "KOL_SUPPORT",
+            "GENERAL_GOAL",
+            "TIKTOK",
+            "FACEBOOK",
+            "TELEGRAM",
+            "INSTAGRAM",
+            "YOUTUBE",
+            "REQUEST_CONSULT",
+            "BACK_TO_SALE_MENU"
+        ):
+            print(
+                "🤖 [AI CALL]",
+                "| language =", current_context.get("language"),
+                "| category =", current_context.get("sale_category"),
+                "| platform =", current_context.get("platform"),
+            )
 
-        ai_result = ai_service.handle_ai_reply(
-            session_id=session_id,
-            user_message=message,
-            language=language
-        )
-        return jsonify(ai_result)
+            ai_result = ai_service.handle_ai_reply(
+                session_id=session_id,
+                user_message=message,
+                language=language
+            )
+            return jsonify(ai_result)
 
     # ==============================
     # TRẢ RESPONSE THƯỜNG

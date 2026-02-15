@@ -42,11 +42,11 @@ class languageService:
 
             # ===== BOOKING – dùng sau =====
             if message == "BOOKING":
-                return {"reply": BOOKING_REPLY.get(language)}
+                return BOOKING_REPLY.get(language)
 
             # ===== FREE CHAT – dùng sau =====
             if message == "FREE_CHAT":
-                return {"reply": FREE_CHAT_REPLY.get(language)}
+                return FREE_CHAT_REPLY.get(language)
 
         # ===== FALLBACK =====
-        return LANGUAGE_INVALID
+        return {"reply":LANGUAGE_INVALID}
